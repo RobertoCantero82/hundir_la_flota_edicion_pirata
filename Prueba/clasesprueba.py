@@ -7,13 +7,13 @@ class Barco: # creo la clase Barco
         self.coordenadas = [] # incluyo coordenadas para luego poder situar al barco en el tablero
         self.vidas = eslora # las vidas del barco serán iguales a su eslora
         if self.eslora == 2:
-            self.nombre = "Buque" # si la eslora es 2, el nombre será Buque
+            self.nombre = "canoa" # si la eslora es 2, el nombre será Buque
         elif self.eslora == 3:
-            self.nombre = "Acorazado" # si la eslora es 3, el nombre será Acorazado
+            self.nombre = "carabela" # si la eslora es 3, el nombre será Acorazado
         elif self.eslora == 4:
-            self.nombre = "Destructor" # si la eslora es 4, el nombre será Destructor
+            self.nombre = "fragata" # si la eslora es 4, el nombre será Destructor
         else:
-            self.nombre = "Barco" # en cualquier otro caso, Barco
+            self.nombre = "embarcación" # en cualquier otro caso, Barco
     
     def recibir_impacto(self):
         self.vidas -= 1

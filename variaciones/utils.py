@@ -4,7 +4,7 @@ import random # librería para los barcos aleatorios y los disparos aleatorios
 import clases # librería con las clases de barcos
 import numpy as np # librería para gestionar matrices y arrays
 
-# FUNCIÓN PARA CREAR TABLEROS DE 3X3 CON " " EN CADA CASILLA
+# FUNCIÓN PARA CREAR TABLEROS DE 10X10 CON " " EN CADA CASILLA
 
 def crear_tablero(tamaño:tuple = (10,10)): 
    tablero = np.full(tamaño, " ") # creo un array de tamaño por defecto 10x10
@@ -12,47 +12,50 @@ def crear_tablero(tamaño:tuple = (10,10)):
 
 # FUNCIÓN PARA MOSTRAR LOS TABLEROS EN TERMINAL
 
-def mostrar_tableros(mi_tablero, tablero_rival): 
-   print() # espacio
-   print("Mi tablero") # nombre del tablero del jugador
-   print(mi_tablero) # imprimo el tablero del jugador
-   print() # espacio
-   print("Tablero del rival") # nombre del tablero del ordenador
-   print(tablero_rival) # imprimo el tablero del ordenador
-   print() # espacio
+def mostrar_tableros(mi_tablero, tablero_rival):  # ← eliminada la línea duplicada de dentro
+   header = "   " + " ".join(str(i) for i in range(10)) # Crea "   0 1 2 3 4 5 6 7 8 9"
+   
+   print("\n" + " " * 10 + "MI TABLERO")
+   print(header)
+   for i, fila in enumerate(mi_tablero):
+      print(f"{i:2} | {' '.join(fila)} |") # El :2 asegura que el número ocupe dos espacios
+   
+   print("\n" + " " * 8 + "TABLERO RIVAL")
+   print(header)
+   for i, fila in enumerate(tablero_rival):
+      print(f"{i:2} | {' '.join(fila)} |")
+   print()
 
-# FUNCIÓN PARA COLOCAR LOS BARCOS EN MI TABLERO
-    
-def colocar_barcos(mi_tablero): 
+# FUNCIÓN PARA COLOCAR LOS BARCOS EN MI TABLERO (aleatoriamente)
+
+def colocar_barcos(mi_tablero):
 
    esloras = [2, 2, 2, 3, 3, 4] # creo la lista de esloras
-   flota = [] # creo una lista vacía para guardar las posiciones de los barcos que se van creando 
-
-   print("Comienza a desplegar tus barcos:") # imprimo el mensaje para empezar a colocar los barcos
+   flota = [] # creo una lista vacía para guardar las posiciones de los barcos
 
    for i in esloras: # itero por los elementos en la lista de esloras
       barco = clases.Barco(i) # creo el barco de i de eslora
-      print(f"Colocando el {barco.nombre} ({i} de eslora)") # imprimo el mensaje del tipo de barco y la longitud de eslora
+      colocado = False # por defecto el barco se inicia como no colocado
 
-      while len(barco.coordenadas) < i: # ahora entro en el bucle principal, que se ejecutará mientras la longitud del barco sea menor que la eslora indicada
-         # Lo hago a través de try/except, para evitar que los valores no numéricos rompan el juego
-         try: # el código principal del bucle empieza a partir de aquí
-            print(f"Introduce la casilla {len(barco.coordenadas) + 1} de {i}") # imprimo el mensaje para pedir coordenadas
-            f = int(input("Fila (de 0 a 9): ")) # pido el numero de fila
-            c = int(input("Columna (de 0 a 9): ")) # pido el número de columna
+      while not colocado: # repetimos hasta colocarlo sin solapamientos
+         f = np.random.randint(0, 10) # fila aleatoria entre 0 y 9
+         c = np.random.randint(0, 10) # columna aleatoria entre 0 y 9
+         orientacion = random.choice(["H", "V"]) # orientación aleatoria
+         provisionales = []
 
-            if 0 <= f <= 9 and 0 <= c <= 9 and mi_tablero[f,c] == " ": # Si las coordenadas son correctas y en mi tablero hay espacio vacío
-               mi_tablero[f,c] = "O" # añado el símbolo del barco a las coordenadas facilitadas
-               barco.coordenadas.append((f,c)) # además, añado la posición del barco a su atributo de coordenadas
-               print(mi_tablero) # imprimo el tablero del jugador
-            else:
-               print(f"Casilla no válida. Inténtalo otra vez") # si las coordenadas no son correctas, se piden de nuevo
-         except ValueError:
-            print(f"Solo se pueden introducir números") # cuando hay error de valor, se imprime el error para guiar al jugador
+         if orientacion == "H" and c + i <= 10: # compruebo que cabe en horizontal
+            provisionales = [(f, col) for col in range(c, c + i)]
+         elif orientacion == "V" and f + i <= 10: # compruebo que cabe en vertical
+            provisionales = [(fil, c) for fil in range(f, f + i)]
 
-      flota.append(barco) # por cada iteración correcta voy añadiendo las coordenadas a la lista flota, que guarda las posiciones en el tablero
-      
-   return flota # devuelvo esa lista para poder operar en los disparos
+         if provisionales and all(mi_tablero[pos] == " " for pos in provisionales): # si no hay solapamientos
+            for pos in provisionales:
+               mi_tablero[pos] = "O" # marco la casilla en el tablero
+               barco.coordenadas.append(pos) # guardo la coordenada en el barco
+            flota.append(barco)
+            colocado = True
+
+   return flota # devuelvo la flota para operar en los disparos
 
 # FUNCIÓN PARA COLOCAR LOS BARCOS ALEATORIOS DEL RIVAL
 
@@ -110,8 +113,3 @@ def disparar(casilla, tablero, flota):
       print("Ya habías disparado aquí") # si el disparo se hace a una casilla diferente de "0" o  de " ", es que
                                         # ya se había disparado. Con lo que hay que repetir y se imprime el mensaje
       return "repetido" # devuelve el repetido
-
-   
-  
-
-
