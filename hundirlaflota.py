@@ -47,13 +47,13 @@ while not jugador_gana and not rival_gana:
     time.sleep(1)  
     utils.mostrar_tableros(mi_tablero, tablero_rival)
 
-    # ── Turno del jugador ──────────────────────────────────────────────────────
+    # Turno del jugador
 
     try:
         accion = input(" 💣 ¡Dispara el cañón! (Fila Columna) o 'Q' para huir como un pollo 🐔 : ").lower()
         print()
 
-        if accion == 'q':
+        if accion == 'q': # si abandono, mensaje de despedida
             mensajes_rendicion = [
                 " 🐒🐒🐒 ¿Te rindes? ¡Mira, detrás de ti, un mono de tres cabezas! 🐒🐒🐒 ",
                 " 👎 ¿Abandonas?... ¡Sabía que ese traje de pirata te venía grande! 👎 ",
@@ -66,14 +66,14 @@ while not jugador_gana and not rival_gana:
             break
 
         coords = accion.replace(",", " ").split()
-        if len(coords) != 2:
+        if len(coords) != 2: # si escribo mal los números, error
             print(" 🤕 ¡Casi te cortas con tu propio garfio! El formato es: 1 2 🤕 ")
             print()
             continue
 
         f, c = map(int, coords)
 
-        if not (0 <= f <= 9 and 0 <= c <= 9):
+        if not (0 <= f <= 9 and 0 <= c <= 9): # si pongo un rango fuera del tablero, error
             print(" 📜 ¡Te sales del mapa! Tu mundo solo está entre el 0 y el 9. 📜 ")
             print()
             continue
@@ -96,19 +96,19 @@ while not jugador_gana and not rival_gana:
             tablero_rival[f, c] = "A"
             time.sleep(1)
 
-    except ValueError:
+    except ValueError: # mensaje de error cuando no se utilizan números
         print(" 🔢 ¡Eso no son coordenadas, son insultos mal redactados! ¡Usa números! 🔢 ")
         print()
         continue
 
-    # ── Turno del rival ────────────────────────────────────────────────────────
+    #  Turno del rival 
 
     if disparo != "repetido":
         print(" 🧭 Estoy consultando la brújula... ¡Prepárate! 🧭 ")
         print()
         time.sleep(1)
 
-        f_aleatoria = np.random.randint(0, 10)  # ← cambiado de 10 a 3
+        f_aleatoria = np.random.randint(0, 10)  
         c_aleatoria = np.random.randint(0, 10)
 
         print(f" ☄️ ¡Un proyectil silba hacia ({f_aleatoria}, {c_aleatoria})")
@@ -121,7 +121,7 @@ while not jugador_gana and not rival_gana:
 
         rival_gana = not np.any(mi_tablero == "O")  # compruebo victoria rival tras primer disparo
         
-        while disparo_rival == "tocado" and not rival_gana:
+        while disparo_rival == "tocado" and not rival_gana: 
             print(" 🆘 ¡Te he dado! ¡Tu apellido ahora es Problemas! 🆘 ")
             print()
             time.sleep(1)
@@ -138,7 +138,7 @@ while not jugador_gana and not rival_gana:
 
             rival_gana = not np.any(mi_tablero == "O")  # compruebo victoria rival tras cada disparo extra
    
-    # ── Compruebo si hay victoria ──────────────────────────────────────────────
+    # Compruebo si hay victoria
 
     jugador_gana = not np.any(tablero_rival_oculto == "O")
     rival_gana = not np.any(mi_tablero == "O")

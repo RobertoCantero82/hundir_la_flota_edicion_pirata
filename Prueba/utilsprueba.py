@@ -1,4 +1,4 @@
-# IMPORTO LAS LIBRERÍAS y CÓDIGOS NECESARIOS
+# IMPORTO LAS LIBRERÍAS y CÓDIGOS DE COLOR
 
 import random # librería para los barcos aleatorios y los disparos aleatorios
 import clasesprueba # ← corregido: antes ponía "clases"
@@ -8,7 +8,7 @@ ROJO    = "\033[91m"
 AZUL    = "\033[94m"
 RESET   = "\033[0m"
 
-# FUNCIÓN PARA CREAR TABLEROS DE 3X3 CON " " EN CADA CASILLA
+# FUNCIÓN PARA CREAR TABLEROS 
 
 def crear_tablero(tamaño:tuple = (3,3)):
    tablero = np.full(tamaño, " ")

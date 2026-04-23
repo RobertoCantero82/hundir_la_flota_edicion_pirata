@@ -15,10 +15,10 @@ class Barco: # creo la clase Barco
         else:
             self.nombre = "embarcación" # en cualquier otro caso, Barco
     
-    def recibir_impacto(self):
+    def recibir_impacto(self): # quitar vidas con cada impacto
         self.vidas -= 1
 
-    def hundido(self):
+    def hundido(self): # hundir barco si las vidas son igual a 0
         return self.vidas == 0
     
         
