@@ -46,3 +46,9 @@ Este proyecto no es solo una recreación del clásico juego de mesa. Este es el 
 5. Función para colocar los barcos en el tablero del rival.
    
 6. Función para disparar.
+
+## 📦 Distribución del repositorio
+
+- En la ruta principal se encuentra hundirlaflota.py, que es el archivo principal que se ejecuta. Después están clases.py y utils.pys, que son los archivos que recogen las clases y las funciones, respectivamente.
+- En la carpeta img, se incluyen las imágenes necesarias para adornar el repositorio.
+- En la carpeta prueba se incluye una versión mini del juego, pensaba como banco de pruebas para comprobar que todo funciona correctamente y no tener que jugar una partida más larga.
