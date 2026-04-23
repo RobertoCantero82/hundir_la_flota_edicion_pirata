@@ -38,14 +38,16 @@ Este proyecto no es solo una recreación del clásico juego de mesa. Este es el 
 1. Importo las librerías: la creada como clases, Random y NumPy.
 
 2. Función para crear tableros.
+   
+3. Función para colorear las celdas.
 
-3. Función para mostrar los tableros.
+4. Función para mostrar los tableros.
    
-4. Función para colocar los barcos en el tablero del jugador.
+5. Función para colocar los barcos en el tablero del jugador.
    
-5. Función para colocar los barcos en el tablero del rival.
+6. Función para colocar los barcos en el tablero del rival.
    
-6. Función para disparar.
+7. Función para disparar.
 
 ## 📂 Distribución del repositorio
 
