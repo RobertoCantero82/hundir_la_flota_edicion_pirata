@@ -2,77 +2,47 @@
   <img src="img/banner.png" width="100%" alt="Hundir la Flota - Edición Vitoria-Gasteiz">
 </p>
 
-<p align="center">
-    <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python Version">
-    <img src="https://img.shields.io/badge/Status-Project%20Delivered-green.svg" alt="Project Status">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
-    <a href="https://linkedin.com/in/tu-perfil"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="LinkedIn"></a>
-</p>
+<h1 align="center">⚓ Simulador de estrategia naval desarrollado en Python para el Bootcamp de Data Science de The Bridge  ⚓</h1>
 
-<h1 align="center">⚓ Battleship: Coding the Deep ⚓</h1>
-
-<p align="center">
-  <b>Simulador de estrategia naval desarrollado en Python para el Bootcamp de Data Science de The Bridge.</b>
-</p>
-
----
 
 ## 📖 Misión y Objetivos
 
-Este proyecto no es solo una recreación del clásico juego de mesa. Es un desafío de ingeniería para construir un **motor de lógica de juego robusto** basado en Programación Orientada a Objetos (POO). El objetivo fue desarrollar un sistema capaz de gestionar:
+Este proyecto no es solo una recreación del clásico juego de mesa. Este es el primer desafío de programación del bootcamp de Data Science para demostrar los conocimientos adquiridos en Python y Programación Orientada a Objetos. Gracias al proyecto he aprendido a:
 
-1.  **Lógica Compleja de Tableros:** Colocación validada de flotas y gestión de estados de casillas (Agua/Tocado/Hundido).
-2.  **Un Oponente Táctico:** Implementación de una IA que no solo dispara al azar, sino que toma decisiones basadas en el historial de combate.
-3.  **Flujo de Turnos Asíncrono:** Gestión limpia del bucle de juego Jugador vs. Máquina.
+1.  **Estructurar la lógica del código:** gestionando el proyecto en archivos y pensando las fases del juego para trasladarlas al lenguaje del ordenador.
+2.  **Aplicar los conceptos aprendidos desde el inicio del bootcamp:** poniendo en práctica condicionales, bucles o la propia Programación Orientada a Objetos.
+3.  **Conseguir crear un entorno de juego funcional y divertido:** no solo que el juego funcione, sino que siga las principales reglas del juego de mesa original, con divertidas características adicionales.
 
----
+## 🚀 Flujo de trabajo
 
-## 👁️ Visualización del Combate
+#### ⚓ Archivo principal (_main.py_)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/tu-usuario/tu-repo/main/reports/figures/gameplay_demo.gif" alt="Gameplay Demo" width="70%">
-  <br>
-  <i>Vista del puente de mando: Tablero táctico en consola con feedback visual de impactos.</i>
-</p>
+1. Importación de librerías: las creadas para las funciones y clases, además de NumPy y Random.
 
----
+2. Creación de los tableros (jugador, rival y el oculto del rival).
 
-## 🏗️ Arquitectura del Sistema (Diagrama)
+3. Colocación de los barcos para obtener la flota del jugador y la flota del rival.
+   
+4. Bucle del juego.
+   
+5. Resultado de la victoria/derrota. 
 
-Para este proyecto, decidí utilizar un enfoque de **Programación Orientada a Objetos (POO)** para asegurar la escalabilidad del código. Aquí puedes ver cómo interactúan las clases principales:
+#### 📦 Archivo de la clase (_clases.py_)
 
-```mermaid
-classDiagram
-    class GameEngine {
-        +Player human
-        +Player ai
-        +start_game()
-        +game_loop()
-    }
-    class Player {
-        +Board board
-        +Fleet fleet
-        +string name
-        +attack(coordinate)
-    }
-    class AIOponent {
-        +list attack_history
-        +strategy_level
-        +make_decision()
-    }
-    class Board {
-        +matrix grid
-        +place_ship(ship, coord)
-        +receive_shot(coord)
-    }
-    class Ship {
-        +string type
-        +int size
-        +int hits
-        +is_sunk()
-    }
+1. Creación de la clase Barco: incluirá el tamaño (eslora), las coordenadas para situarlo en el tablero, las vidas y el nombre, que dependerá del tamaño.
 
-    GameEngine --> Player : manages
-    Player <|-- AIOponent : inherits
-    Player --> Board : owns
-    Board --> Ship : contains
+2. Funciones: un barco puede recibir un impacto (lo que le quita una vida) o puede hundirse (cuando no tiene vidas).
+
+#### ⚙️ Archivo de funciones (_utils.py_)
+
+1. Importo las librerías: la creada como clases, Random y NumPy.
+
+2. Función para crear tableros.
+
+3. Función para mostrar los tableros.
+   
+4. Función para colocar los barcos en el tablero del jugador.
+   
+5. Función para colocar los barcos en el tablero del rival.
+   
+6. Función para disparar.
